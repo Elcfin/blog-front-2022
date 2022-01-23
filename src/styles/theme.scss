@@ -1,0 +1,25 @@
+.main-x,
+.base {
+  /*   $primary: hsl(162, 67%, 18%);
+  $secondary: hsl(33, 75%, 68%);
+  $bg: hsl(220, 37%, 97%);
+  $on-bg: hsl(220, 13%, 9%); */
+
+  --p-h: 162;
+  --p-s: 67;
+  --p-light: 18;
+
+  --s-h: 33;
+  --s-s: 75;
+  --s-light: 68;
+
+  --bg-h: 228;
+  --bg-s: 38;
+  --bg-light: 97;
+
+  --on-bg-h: 220;
+  --on-bg-s: 13;
+  --on-bg-light: 9;
+
+  --dark: -1;
+}

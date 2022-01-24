@@ -1,0 +1,12 @@
+.carousel-x {}
+
+.carousel {
+  width: 80vw;
+  height: 300px;
+  background-color: var(--on-bg);
+
+  @media (min-width: 769.33px) {
+    width: 56vw;
+    height: 420px;
+  }
+}

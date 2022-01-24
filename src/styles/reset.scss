@@ -12,7 +12,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  cursor: url("../assets/imgs/cursor.png") 3 3, default;
+}
+
+.main-x {
   min-height: 100vh;
+  background-color: var(--bg);
 }
 
 code {

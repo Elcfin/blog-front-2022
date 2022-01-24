@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
+
+.next {
+  margin-top: 10px;
+  z-index: 1;
+
+  @media (min-width: 769.33px) {
+    margin-top: 60px;
+  }
+
+  &-btn,
+  &-btn::after {
+    position: relative;
+
+    padding: 10px 30px;
+    color: var(--on-bg);
+    background-color: var(--bg);
+    border: none;
+    user-select: none;
+    font-family: "IM Fell English SC";
+  }
+
+  /*   &-btn {
+    border: 2px dotted var(--bg);
+    transition: border 0.5s;
+  }
+
+
+  &-btn:hover {
+    border: 2px dotted var(--on-bg);
+  } */
+
+  &-btn::after {
+    --slice-0: inset(50% 50% 50% 50%);
+    --slice-1: inset(70% 0 0 0);
+    --slice-2: inset(50% 0 40% 0);
+    --slice-3: inset(10% 0 80% 0);
+    --slice-4: inset(40% 0 43% 0);
+    --slice-5: inset(0 0 80% 0);
+
+    content: "NEXT";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-shadow: -3px -3px 0px var(--primary), 3px 3px 0px var(--secondary);
+    clip-path: var(--slice-0);
+  }
+
+  &-btn:hover::after {
+    animation: 0.5s glitch;
+    animation-timing-function: steps(2, end);
+  }
+
+  @keyframes glitch {
+    0% {
+      clip-path: var(--slice-4);
+      transform: translate(2em, 0);
+    }
+
+    20% {
+      clip-path: var(--slice-5);
+      transform: translate(0, 0);
+    }
+
+    40% {
+      clip-path: var(--slice-1);
+      transform: translate(-2.4em, -0.8em);
+    }
+
+    50% {
+      clip-path: var(--slice-2);
+      transform: translate(-1.6em, 0.8em);
+    }
+
+    60% {
+      clip-path: var(--slice-3);
+      transform: translate(2em, 0.4em);
+    }
+
+    90% {
+      clip-path: var(--slice-4);
+      transform: translate(2em, 0);
+    }
+
+    100% {
+      clip-path: var(--slice-5);
+      transform: translate(0, 0);
+    }
+  }
+}

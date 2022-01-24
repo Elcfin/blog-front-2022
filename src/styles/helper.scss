@@ -1,0 +1,11 @@
+.only-big {
+  @media (max-width: 769.33px) {
+    display: none !important;
+  }
+}
+
+.only-small {
+  @media (min-width: 769.33px) {
+    display: none !important;
+  }
+}

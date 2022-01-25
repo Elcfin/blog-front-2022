@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import throttle from "../utils/throttle";
 
 type pointPosition = [x: number, y: number];
 const bezier = (
@@ -36,7 +37,7 @@ window.addEventListener("mousemove", (e) => {
   mousePosition.y = e.pageY;
 });
 
-class Particle {
+export class Particle {
   x;
   y;
   initX;
@@ -94,9 +95,12 @@ class Particle {
   }
 }
 
-type CanvasInfoType = { width: number; height: number; fill: string };
+export type CanvasInfoType = { width: number; height: number; fill: string };
 
-const createViceCanvas = (draw: Function, canvasInfo: CanvasInfoType) => {
+export const createViceCanvas = (
+  draw: (ctx: CanvasRenderingContext2D) => void,
+  canvasInfo: CanvasInfoType
+) => {
   const viceCanvas = document.createElement("canvas");
   viceCanvas.width = canvasInfo.width;
   viceCanvas.height = canvasInfo.height;
@@ -124,33 +128,9 @@ const getContentInfo = (
   return particles;
 };
 
-const render = (
-  ctx: CanvasRenderingContext2D,
-  points: Particle[],
-  offset: { top: number; left: number },
-  canvasInfo: CanvasInfoType
-) => {
-  ctx.clearRect(0, 0, canvasInfo.width, canvasInfo.height);
-  points.forEach((point) => {
-    point.update(offset);
-    point.draw(ctx);
-  });
-
-  /*   let raf: number[] = [];
-  const fn = () => {
-    raf = raf.concat(render(ctx, points, offset, canvasInfo));
-  };
-  raf.push(window.requestAnimationFrame(fn));
-  return raf; */
-  /*   const raf = window.requestAnimationFrame(() => render(ctx, points));
-  if (points[0].item >= 1) {
-    window.cancelAnimationFrame(raf);
-  } */
-};
-
 const useCanvas = (
   canvasRef: React.RefObject<HTMLCanvasElement>,
-  drawFn: Function,
+  drawFn: (ctx: CanvasRenderingContext2D) => void,
   canvasInfo: CanvasInfoType
 ) => {
   const [windowSize, setWindowSize] = useState({
@@ -158,50 +138,48 @@ const useCanvas = (
     y: document.body.clientHeight,
   });
 
+  let timer: number;
+
+  const render = (
+    ctx: CanvasRenderingContext2D,
+    points: Particle[],
+    offset: { top: number; left: number },
+    canvasInfo: CanvasInfoType
+  ) => {
+    ctx.clearRect(0, 0, canvasInfo.width, canvasInfo.height);
+    points.forEach((point) => {
+      point.update(offset);
+      point.draw(ctx);
+    });
+
+    timer = window.requestAnimationFrame(() =>
+      render(ctx, points, offset, canvasInfo)
+    );
+  };
+
   useEffect(() => {
+    const points = createViceCanvas(drawFn, canvasInfo);
     const fn = () => {
       setWindowSize(() => {
         return { x: document.body.clientWidth, y: document.body.clientHeight };
       });
     };
     window.addEventListener("resize", fn);
-    /* let raf: number[] = []; */
 
-    let timer: number;
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext(
         "2d"
       ) as CanvasRenderingContext2D;
-      const points = createViceCanvas(drawFn, canvasInfo);
 
-      timer = window.setInterval(() => {
-        render(
-          ctx,
-          points,
-          {
-            top: canvasRef.current!.offsetTop,
-            left: canvasRef.current!.offsetLeft,
-          },
-          canvasInfo
-        );
-      }, 16.7);
-      /*       raf = raf.concat(
-        render(
-          ctx,
-          points,
-          {
-            top: canvasRef.current.offsetTop,
-            left: canvasRef.current.offsetLeft,
-          },
-          canvasInfo
-        )
-      ); */
+      render(
+        ctx,
+        points,
+        canvasRef.current.getBoundingClientRect(),
+        canvasInfo
+      );
     }
     return () => {
-      /*       raf.forEach((item) => {
-        window.cancelAnimationFrame(item);
-      }); */
-      window.clearInterval(timer);
+      window.cancelAnimationFrame(timer);
       window.removeEventListener("resize", fn);
     };
   }, [canvasRef, windowSize, drawFn, canvasInfo]);

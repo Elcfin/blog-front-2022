@@ -1,20 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 
+#canvas-next {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 124px;
+  height: 54px;
+}
+
 .next {
-  margin-top: 10px;
+  position: relative;
   z-index: 1;
 
   @media (min-width: 769.33px) {
-    margin-top: 60px;
+    margin: 20px;
   }
 
   &-btn,
   &-btn::after {
     position: relative;
 
-    padding: 10px 30px;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
     color: var(--on-bg);
-    background-color: var(--bg);
+    background-color: transparent;
     border: none;
     user-select: none;
     font-family: "IM Fell English SC";

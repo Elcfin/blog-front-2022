@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  height: 100vh;
   overflow: hidden;
 
   @media (min-width: 769.33px) {
@@ -14,10 +15,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 
     @media (min-width: 769.33px) {
+      justify-content: center;
       height: 100vh;
+
     }
   }
 }

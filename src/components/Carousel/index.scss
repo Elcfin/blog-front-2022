@@ -1,12 +1,63 @@
-.carousel-x {}
+.carousel-x {
+  z-index: 2;
+}
 
 .carousel {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(50, 1fr);
+  grid-row-gap: 1px;
+  grid-column-gap: 1px;
+
+  position: relative;
   width: 80vw;
   height: 300px;
-  background-color: var(--on-bg);
+  overflow: hidden;
+  /*   background-image: linear-gradient(to right, var(--on-bg) 5%,
+    var(--bg) 5% 7%, var(--on-bg) 7% 9%,
+    var(--bg) 9% 11%, var(--on-bg) 11% 89%,
+    var(--bg) 89% 91%, var(--on-bg)91% 93%,
+    var(--bg) 93% 95%, var(--on-bg)95%); */
+  /* border-radius: 20px; */
+  /*   border: 2.3px dotted var(--on-bg);
+   */
 
   @media (min-width: 769.33px) {
-    width: 56vw;
+    width: 48vw;
+    max-width: 960px;
     height: 420px;
   }
+
+  &-item {
+    background-color: var(--on-bg);
+    filter: blur(6px)
+  }
+}
+
+.carousel-index-x {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-index {
+  margin: 18px 9px;
+  height: 4px;
+  width: 4px;
+  transform: rotate(45deg);
+  background-color: var(--on-bg-d);
+  opacity: 0.5;
+}
+
+.carousel-index-active {
+  background-color: var(--on-bg-l);
+  opacity: 1;
+}
+
+#canvas-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 960px;
+  height: 420px;
 }

@@ -1,8 +1,8 @@
-.carousel-x {
+.cover-carousel-x {
   z-index: 2;
 }
 
-.carousel {
+.cover-carousel {
   display: grid;
   grid-template-columns: repeat(50, 1fr);
   grid-template-rows: repeat(50, 1fr);
@@ -29,27 +29,27 @@
   }
 
   &-item {
-    background-color: var(--on-bg);
+    background-color: var(--bg);
     filter: blur(6px)
   }
 }
 
-.carousel-index-x {
+.cover-carousel-index-x {
   display: flex;
   justify-content: center;
 }
 
-.carousel-index {
+.cover-carousel-index {
   margin: 18px 9px;
   height: 4px;
   width: 4px;
   transform: rotate(45deg);
-  background-color: var(--on-bg-d);
+  background-color: var(--bg-d);
   opacity: 0.5;
 }
 
-.carousel-index-active {
-  background-color: var(--on-bg-l);
+.cover-carousel-index-active {
+  background-color: var(--bg-l);
   opacity: 1;
 }
 

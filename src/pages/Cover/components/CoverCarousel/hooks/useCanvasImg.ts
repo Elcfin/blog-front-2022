@@ -3,7 +3,8 @@ import {
   Particle,
   CanvasInfoType,
   createViceCanvas,
-} from "../../../hooks/useCanvas";
+  useOffset,
+} from "../../../../../hooks/useCanvas";
 
 export const HEIGHT = 420;
 export const WIDTH = 960;
@@ -66,6 +67,7 @@ const useCanvasImg = (
     );
   };
 
+  const offset = useOffset(canvasRef);
   useEffect(() => {
     const fn = () => {
       setWindowSize(() => {
@@ -86,19 +88,14 @@ const useCanvasImg = (
           canvasInfo
         );
 
-        render(
-          ctx,
-          points,
-          canvasRef.current.getBoundingClientRect(),
-          canvasInfo
-        );
+        render(ctx, points, offset, canvasInfo);
       }
       return () => {
         window.cancelAnimationFrame(timer);
         window.removeEventListener("resize", fn);
       };
     }
-  }, [imgState.state, canvasRef, windowSize]);
+  }, [imgState.state, canvasRef, windowSize, offset]);
 };
 
 export default useCanvasImg;

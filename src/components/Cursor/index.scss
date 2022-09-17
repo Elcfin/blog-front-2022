@@ -14,7 +14,7 @@
   margin-top: -18px;
   width: 36px;
   height: 36px;
-  border: 1px solid var(--on-bg);
+  border: 1px solid var(--bg);
   opacity: .5;
   transition: margin-top 0.3s, margin-left 0.3s, width 0.3s, height 0.3s, background-color 0.3s,
     top 0.1s ease-out, left 0.1s ease-out;
@@ -34,7 +34,6 @@
     margin-top: -14px;
     width: 28px;
     height: 28px;
-    background-color: var(--bg-l);
   }
 }
 
@@ -46,7 +45,7 @@
   pointer-events: none;
   z-index: 99;
   transform: translate(-50%, -50%) scale(0);
-  border: 1.5px solid var(--on-bg);
+  border: 1.5px solid var(--bg);
 }
 
 .cursor-click {

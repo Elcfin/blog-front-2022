@@ -2,20 +2,20 @@ import "./index.scss";
 import { useRef, useContext } from "react";
 import useCanvasImg, { HEIGHT, WIDTH } from "./hooks/useCanvasImg";
 import useCarousel, { imgList } from "./hooks/useCarousel";
-import { MouseContext } from "../../hooks/useMouseOver";
+import { MouseContext } from "../../../../hooks/useMouseOver";
 
-const Carousel = () => {
+const CoverCarousel = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { curImg, setCurImg } = useCarousel();
   const { setOver, setLeave } = useContext(MouseContext);
   useCanvasImg(canvasRef, curImg, imgList);
   return (
-    <div className="carousel-x">
-      <div className="carousel">
+    <div className="cover-carousel-x">
+      <div className="cover-carousel">
         {Array(50 * 50)
           .fill(0)
           .map((item, index) => (
-            <div className="carousel-item" key={index}></div>
+            <div className="cover-carousel-item" key={index}></div>
           ))}
         <canvas
           id="canvas-img"
@@ -24,10 +24,10 @@ const Carousel = () => {
           height={HEIGHT}
         ></canvas>
       </div>
-      <div className="carousel-index-x">
+      <div className="cover-carousel-index-x">
         {imgList.map((img, index) => {
-          const className = ["carousel-index"];
-          if (curImg === index) className.push("carousel-index-active");
+          const className = ["cover-carousel-index"];
+          if (curImg === index) className.push("cover-carousel-index-active");
           return (
             <div
               key={index}
@@ -48,4 +48,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default CoverCarousel;

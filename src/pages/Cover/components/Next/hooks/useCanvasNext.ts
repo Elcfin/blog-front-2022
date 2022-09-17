@@ -1,4 +1,4 @@
-import useCanvas from "../../../hooks/useCanvas";
+import useCanvas from "../../../../../hooks/useCanvas";
 
 export const WIDTH = 124;
 export const HEIGHT = 54;

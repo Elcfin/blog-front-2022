@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import throttle from "../utils/throttle";
 
 type pointPosition = [x: number, y: number];
 const bezier = (
@@ -33,8 +32,9 @@ const bezier = (
 const mousePosition = { x: 0, y: 0 };
 
 window.addEventListener("mousemove", (e) => {
-  mousePosition.x = e.pageX;
-  mousePosition.y = e.pageY;
+  /* 鼠标相对于视口的位置 */
+  mousePosition.x = e.clientX;
+  mousePosition.y = e.clientY;
 });
 
 export class Particle {
@@ -128,16 +128,31 @@ const getContentInfo = (
   return particles;
 };
 
+export const useOffset = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
+  const [offset, setOffset] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    const fn = () => {
+      if (canvasRef.current) {
+        setOffset(canvasRef.current.getBoundingClientRect());
+      }
+    };
+    fn();
+    window.addEventListener("scroll", fn);
+    window.addEventListener("resize", fn);
+    return () => {
+      window.removeEventListener("scroll", fn);
+      window.removeEventListener("resize", fn);
+    };
+  }, [canvasRef]);
+  return offset;
+};
+
 const useCanvas = (
   canvasRef: React.RefObject<HTMLCanvasElement>,
   drawFn: (ctx: CanvasRenderingContext2D) => void,
   canvasInfo: CanvasInfoType
 ) => {
-  const [windowSize, setWindowSize] = useState({
-    x: document.body.clientWidth,
-    y: document.body.clientHeight,
-  });
-
   let timer: number;
 
   const render = (
@@ -157,32 +172,22 @@ const useCanvas = (
     );
   };
 
+  const offset = useOffset(canvasRef);
+
   useEffect(() => {
     const points = createViceCanvas(drawFn, canvasInfo);
-    const fn = () => {
-      setWindowSize(() => {
-        return { x: document.body.clientWidth, y: document.body.clientHeight };
-      });
-    };
-    window.addEventListener("resize", fn);
 
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext(
         "2d"
       ) as CanvasRenderingContext2D;
 
-      render(
-        ctx,
-        points,
-        canvasRef.current.getBoundingClientRect(),
-        canvasInfo
-      );
+      render(ctx, points, offset, canvasInfo);
     }
     return () => {
       window.cancelAnimationFrame(timer);
-      window.removeEventListener("resize", fn);
     };
-  }, [canvasRef, windowSize, drawFn, canvasInfo]);
+  }, [canvasRef, offset, canvasInfo /* , drawFn */]);
 };
 
 export default useCanvas;

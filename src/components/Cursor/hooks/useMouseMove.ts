@@ -7,8 +7,8 @@ const useMouseMove = () => {
   useEffect(() => {
     const fn = (e: MouseEvent) => {
       setPosition({
-        x: e.pageX,
-        y: e.pageY,
+        x: e.clientX,
+        y: e.clientY,
       });
     };
 

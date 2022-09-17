@@ -1,23 +1,9 @@
-import "./index.scss";
+import MainBg from "./components/MainBg";
 
-import CanvasCircle from "../../components/CanvasCircle";
-import CanvasMountain from "../../components/CanvasMountain";
-import Carousel from "../../components/Carousel";
-import Next from "../../components/Next";
-
-type MainProps = {};
-
-const Main = (props: MainProps) => {
+const Main = () => {
   return (
-    <div>
-      <div className="main">
-        <CanvasCircle />
-        <div className="main-content">
-          <Carousel />
-          <Next />
-        </div>
-      </div>
-      <CanvasMountain />
+    <div className="main">
+      <MainBg />
     </div>
   );
 };

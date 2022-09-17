@@ -1,0 +1,23 @@
+#canvas-circle-main {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  height: 300px;
+  width: 300px;
+  opacity: 0;
+
+  @media (min-width: 769.33px) {
+    left: auto;
+    right: 0;
+    transform: translate(0, 0);
+  }
+}
+
+#canvas-mountain-main {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 500px;
+  width: 600px;
+}

@@ -11,6 +11,7 @@
 .next {
   position: relative;
   z-index: 1;
+  margin-bottom: 20px;
 
   @media (min-width: 769.33px) {
     margin: 20px;
@@ -23,7 +24,7 @@
     width: 120px;
     height: 50px;
     line-height: 50px;
-    color: var(--on-bg);
+    color: var(--bg);
     background-color: transparent;
     border: none;
     user-select: none;

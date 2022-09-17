@@ -5,7 +5,7 @@ import useMouseMove from "./hooks/useMouseMove";
 import { MouseContext } from "../../hooks/useMouseOver";
 import useMouseClick from "./hooks/useMouseClick";
 
-type CursorProps = {};
+type CursorProps = { color: string; bgColor: string };
 
 const Cursor = (props: CursorProps) => {
   const position = useMouseMove();
@@ -21,11 +21,19 @@ const Cursor = (props: CursorProps) => {
     >
       <div
         className="cursor-outer"
-        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+        style={{
+          transform: `translate(${position.x}px, ${position.y}px)`,
+          borderColor: `var(${props.color})`,
+          backgroundColor: isOver ? `var(${props.bgColor}-l)` : "",
+        }}
       ></div>
       <div
         className="cursor-effect"
-        style={{ left: clickPosition.x, top: clickPosition.y }}
+        style={{
+          left: clickPosition.x,
+          top: clickPosition.y,
+          borderColor: `var(${props.color})`,
+        }}
       ></div>
       {/*       <div
         className={"cursor-inner"}

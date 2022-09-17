@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 export const imgList = [
-  require("../../../assets/imgs/canvasImgChess-title.png"),
-  require("../../../assets/imgs/canvasImgCat-title.png"),
+  require("../../../../../assets/imgs/canvasImgChess-title.png"),
+  require("../../../../../assets/imgs/canvasImgCat-title.png"),
 ];
 const useCarousel = () => {
   const [curImg, setCurImg] = useState(0);

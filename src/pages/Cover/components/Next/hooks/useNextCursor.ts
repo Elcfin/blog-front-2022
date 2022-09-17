@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
-import { MouseContext } from "../../../hooks/useMouseOver";
+import { MouseContext } from "../../../../../hooks/useMouseOver";
 
-const useNextOver = (nextRef: React.RefObject<HTMLButtonElement>) => {
+const useNextCursor = (nextRef: React.RefObject<HTMLButtonElement>) => {
   const { setOver, setLeave } = useContext(MouseContext);
 
   useEffect(() => {
@@ -14,6 +14,8 @@ const useNextOver = (nextRef: React.RefObject<HTMLButtonElement>) => {
       });
     }
   });
+
+  return [setLeave];
 };
 
-export default useNextOver;
+export default useNextCursor;

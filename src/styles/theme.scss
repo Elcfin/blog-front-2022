@@ -1,9 +1,9 @@
-.main-x,
+body,
 .base {
   /*   $primary: hsl(162, 67%, 18%);
   $secondary: hsl(33, 75%, 68%);
-  $on-bg: hsl(228, 33%, 97%);
-  $bg: hsl(220, 13%, 9%); */
+  $bg: hsl(228, 33%, 97%);
+  $on-bg: hsl(220, 13%, 9%); */
 
   --p-h: 162;
   --p-s: 67;
@@ -13,13 +13,13 @@
   --s-s: 75;
   --s-light: 68;
 
-  --on-bg-h: 228;
-  --on-bg-s: 38;
-  --on-bg-light: 97;
+  --bg-h: 228;
+  --bg-s: 38;
+  --bg-light: 97;
 
-  --bg-h: 220;
-  --bg-s: 13;
-  --bg-light: 9;
+  --on-bg-h: 220;
+  --on-bg-s: 13;
+  --on-bg-light: 9;
 
   --dark: -1;
 }
